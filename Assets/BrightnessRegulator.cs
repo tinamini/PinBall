@@ -73,7 +73,7 @@ public class BrightnessRegulator : MonoBehaviour
 		if (this.degree >= 0)
 		{
 			// 発光強度の計算
-			Color emissionColor = this.defaultColor * this.magEmission * (this.minEmission + Mathf.Sin(this.degree * Mathf.Deg2Rad));
+			Color emissionColor = this.defaultColor * (this.minEmission + Mathf.Sin(this.degree * Mathf.Deg2Rad) * this.magEmission);
 			// エミッションに色設定
 			myMaterial.SetColor("_EmissionColor", emissionColor);
 			this.degree -= this.speed;
