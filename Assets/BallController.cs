@@ -18,6 +18,27 @@ public class BallController : MonoBehaviour
 	/// ゲームオーバー表示テキスト
 	/// </summary>
 	private GameObject gameoverText;
+
+	/// <summary>
+	/// 得点
+	/// </summary>
+	private int score = 0;
+
+	/// <summary>
+	/// 得点テキスト
+	/// </summary>
+	private GameObject scoreText;
+
+	/// <summary>
+	/// 衝突物と得点のテーブル
+	/// </summary>
+	private Dictionary<string, int> scoreTable = new Dictionary<string, int>
+	{
+		{ "SmallCloudTag"	,	5	},
+		{ "SmallStarTag"	,	10	},
+		{ "LargeStarTag"	,	20	},
+		{ "LargeCloudTag"	,	25	},
+	};
 	#endregion
 
 	#region Method
@@ -28,6 +49,10 @@ public class BallController : MonoBehaviour
 	{
 		// ゲームオーバーテキストオブジェクト取得
 		this.gameoverText = GameObject.Find("GameOverText");
+
+		// 得点テキストオブジェクト取得
+		this.scoreText = GameObject.Find("ScoreText");
+		this.scoreText.GetComponent<Text>().text = "SCORE:" + score;
 	}
 
 	/// <summary>
@@ -41,6 +66,20 @@ public class BallController : MonoBehaviour
 			// GameOver を表示
 			this.gameoverText.GetComponent<Text>().text = "Game Over";
 		}
+
+		// 点数更新
+		this.scoreText.GetComponent<Text>().text = "SCORE:" + score;
+	}
+
+	/// <summary>
+	/// 衝突時に呼ばれる関数
+	/// </summary>
+	/// <param name="collision">衝突物</param>
+	private void OnCollisionEnter(Collision collision)
+	{
+		int addScore;
+		scoreTable.TryGetValue(collision.gameObject.tag, out addScore);
+		this.score += addScore;
 	}
 	#endregion
 }
