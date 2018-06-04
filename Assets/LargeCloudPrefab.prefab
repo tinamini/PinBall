@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 23179284833172654}
   - component: {fileID: 64741834361295266}
   - component: {fileID: 114805385484057290}
+  - component: {fileID: 114928012078908340}
   m_Layer: 0
   m_Name: LargeCloudPrefab
-  m_TagString: Untagged
+  m_TagString: LargeCloudTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 40355abe9ba0dc34dbc48d9e6b2d17f2, type: 2}
+  - {fileID: 2100000, guid: 70a79d933a7684746b59900d4ebf883e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,5 +109,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e7f8196993bc594b85c8186f89efdfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114928012078908340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1543471387039704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2c5aa33e992fb44815abe54445c565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
