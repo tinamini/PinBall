@@ -52,12 +52,12 @@ public class FripperController : MonoBehaviour
 		//入力を確認
 		CheckInput();
 		// 左矢印キー押下：左フリッパーを動作させる
-		if (/*Input.GetKeyDown(KeyCode.LeftArrow) || */isLeftTouch && tag == "LeftFripperTag")
+		if (Input.GetKeyDown(KeyCode.LeftArrow) || isLeftTouch && tag == "LeftFripperTag")
 		{
 			SetAngle(this.flickAngle);
 		}
 		// 右矢印キー押下：右フリッパーを動作させる
-		if (/*Input.GetKeyDown(KeyCode.RightArrow) || */isRithtTouch && tag == "RightFripperTag")
+		if (Input.GetKeyDown(KeyCode.RightArrow) || isRithtTouch && tag == "RightFripperTag")
 		{
 			SetAngle(this.flickAngle);
 		}
@@ -92,7 +92,7 @@ public class FripperController : MonoBehaviour
 			{
 				if (touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled)
 				{
-					if(touch.position.x > Screen.width / 2)
+					if (touch.position.x > Screen.width / 2)
 					{
 						isRithtTouch = true;
 					}
