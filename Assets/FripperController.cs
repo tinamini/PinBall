@@ -22,6 +22,16 @@ public class FripperController : MonoBehaviour
 	/// 弾いた時の傾き
 	/// </summary>
 	private float flickAngle = -20;
+
+	/// <summary>
+	/// 画面右側がタッチされているか
+	/// </summary>
+	private bool isRithtTouch = false;
+
+	/// <summary>
+	/// 画面左側がタッチされているか
+	/// </summary>
+	private bool isLeftTouch = false;
 	#endregion
 
 	#region Method
@@ -39,23 +49,25 @@ public class FripperController : MonoBehaviour
 	/// </summary>
 	void Update()
 	{
+		//入力を確認
+		CheckInput();
 		// 左矢印キー押下：左フリッパーを動作させる
-		if (Input.GetKeyDown(KeyCode.LeftArrow) && tag == "LeftFripperTag")
+		if (/*Input.GetKeyDown(KeyCode.LeftArrow) || */isLeftTouch && tag == "LeftFripperTag")
 		{
 			SetAngle(this.flickAngle);
 		}
 		// 右矢印キー押下：右フリッパーを動作させる
-		if (Input.GetKeyDown(KeyCode.RightArrow) && tag == "RightFripperTag")
+		if (/*Input.GetKeyDown(KeyCode.RightArrow) || */isRithtTouch && tag == "RightFripperTag")
 		{
 			SetAngle(this.flickAngle);
 		}
 
 		// 矢印キー離上：フリッパーを元に戻す
-		if (Input.GetKeyUp(KeyCode.LeftArrow) && tag == "LeftFripperTag")
+		if (Input.GetKeyUp(KeyCode.LeftArrow) || !isLeftTouch && tag == "LeftFripperTag")
 		{
 			SetAngle(this.defaultAngle);
 		}
-		if (Input.GetKeyUp(KeyCode.RightArrow) && tag == "RightFripperTag")
+		if (Input.GetKeyUp(KeyCode.RightArrow) || !isRithtTouch && tag == "RightFripperTag")
 		{
 			SetAngle(this.defaultAngle);
 		}
@@ -70,6 +82,38 @@ public class FripperController : MonoBehaviour
 		JointSpring jointSpring = this.myHingeJoint.spring;
 		jointSpring.targetPosition = angle;
 		this.myHingeJoint.spring = jointSpring;
+	}
+
+	private void CheckInput()
+	{
+		if (Input.touchCount > 0)
+		{
+			foreach (var touch in Input.touches)
+			{
+				if (touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled)
+				{
+					if(touch.position.x > Screen.width / 2)
+					{
+						isRithtTouch = true;
+					}
+					else
+					{
+						isLeftTouch = true;
+					}
+				}
+				else
+				{
+					if (touch.position.x > Screen.width / 2)
+					{
+						isRithtTouch = false;
+					}
+					else
+					{
+						isLeftTouch = false;
+					}
+				}
+			}
+		}
 	}
 	#endregion
 }
